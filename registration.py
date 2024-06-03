@@ -20,6 +20,8 @@ def save_application(conn, username, age, hypertension, glucose_levels, bmi, car
 def validate_data(username, age, hypertension, glucose_levels, bmi, cardiac_history, smoke):
     if not username or not hypertension or not cardiac_history or not smoke:
         return False
+    if age is None or glucose_levels is None or bmi is None:
+        return False
     try:
         age = int(age)
         glucose_levels = float(glucose_levels)
