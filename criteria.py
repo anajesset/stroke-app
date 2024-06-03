@@ -51,14 +51,22 @@ def update_criteria(data):
     conn.close()
 
 # Function to delete criteria data
-def delete_criteria(id):
+def delete_criteria(criteria_id):
     conn = create_connection()
     cursor = conn.cursor()
-    cursor.execute("DELETE FROM criteria WHERE ID = %s", [(id)])
-    conn.commit()
+    cursor.execute("SELECT * FROM criteria WHERE id = %s", [(criteria_id)])
+    data = cursor.fetchone()
+    if data:
+        cursor.execute("DELETE FROM sub_criteria WHERE criteria_id = %s", [(criteria_id)])
+        cursor.execute("DELETE FROM criteria WHERE id = %s", [(criteria_id)])
+        conn.commit()
+        st.success("Criteria has been deleted successfully!")
+    else:
+        st.error("Criteria with specified ID not found!")
 
     cursor.close()
     conn.close()
+
 
 # Function to get criteria data by ID
 def get_sub_criteria_by_id(id):
