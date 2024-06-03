@@ -46,3 +46,4 @@ def consultation():
 
 if __name__ == "__main__":
     consultation()
+    

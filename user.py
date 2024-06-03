@@ -5,10 +5,10 @@ import hashlib
 
 def create_connection():
     conn = mysql.connector.connect(
-        host="127.0.0.1",
-        user="root",
-        password="",
-        database="patient_database"
+        host="sql.freedb.tech",
+        user="freedb_anajesset",
+        password="D9@WjYGE9?6&b&n",
+        database="freedb_scpk_database"
     )
     return conn
 
