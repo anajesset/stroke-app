@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from registration import create_connection
+from user import create_connection
 
 def calculate_wp(data):
     weights = {
@@ -44,14 +44,6 @@ def show_priority():
 
     columns = ['id', 'username', 'age', 'hypertension', 'glucose_levels', 'bmi', 'cardiac_history', 'smoke']
     df = pd.DataFrame(data, columns=columns)
-    
-    df['age'] = pd.to_numeric(df['age'], errors='coerce')
-    df['hypertension'] = pd.to_numeric(df['hypertension'], errors='coerce')
-    df['glucose_levels'] = pd.to_numeric(df['glucose_levels'], errors='coerce')
-    df['bmi'] = pd.to_numeric(df['bmi'], errors='coerce')
-    df['age'].fillna(df['age'].mean(), inplace=True)
-    df['glucose_levels'].fillna(df['glucose_levels'].mean(), inplace=True)
-    df['bmi'].fillna(df['bmi'].mean(), inplace=True)
 
     df['C1'] = df['age'].apply(lambda x: 1 if x <= 10 else (2 if x <= 20 else (3 if x <= 30 else (4 if x <= 40 else (5 if x <= 50 else (6 if x <= 60 else (7 if x <= 70 else (8 if x <= 80 else (9 if x <= 90 else 10)))))))))
     df['C2'] = df['hypertension'].map({'Ya': 3, 'Tidak': 1})
@@ -67,3 +59,4 @@ def show_priority():
 
 if __name__ == "__main__":
     show_priority()
+    
