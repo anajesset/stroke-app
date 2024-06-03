@@ -17,14 +17,11 @@ def save_application(conn, username, age, hypertension, glucose_levels, bmi, car
     conn.commit()
     cursor.close()
 
-
-
 def validate_data(username, age, hypertension, glucose_levels, bmi, cardiac_history, smoke):
-    if not username or not age or not hypertension or not glucose_levels or not bmi or not cardiac_history or not smoke:
+    if not username or not hypertension or not cardiac_history or not smoke:
         return False
     try:
         age = int(age)
-        hypertension = float(hypertension)
         glucose_levels = float(glucose_levels)
         bmi = float(bmi)
     except ValueError:
