@@ -2,12 +2,10 @@ import streamlit as st
 import pandas as pd
 from joblib import load
 
-# Memuat kembali model
 dt_model = load('decision_tree_model.joblib')
 rf_model = load('random_forest_model.joblib')
 svm_model = load('svm_model.joblib')
 
-# Memuat kembali pipeline preprocessing
 preprocessing_pipeline = load('preprocessing_pipeline.joblib')
 
 def predict_data():
@@ -40,12 +38,10 @@ def predict_data():
         'smoking_status':[smoking_status]
     })
 
-    # Praproses input data
     input_data_preprocessed = preprocessing_pipeline.transform(input_data)
     
     if st.button('Predict'):
-        # Prediksi menggunakan model yang sesuai
-        prediction = dt_model.predict(input_data_preprocessed)  # Gunakan model yang sesuai
+        prediction = dt_model.predict(input_data_preprocessed)
         st.write(prediction)
         if prediction[0] == 1:
             st.error('High risk of stroke!')
